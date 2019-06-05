@@ -1,34 +1,20 @@
 class Solution {
-    func sortedSquares(_ A: [Int]) -> [Int] {
-        if A.count == 1 {
-            return A.map{
-                $0 * $0
-            }
+   func sortedSquares(_ A: [Int]) -> [Int] {
+    let n = A.count
+    var results = [Int?](repeating: nil, count: n)
+    var i = 0, j = n - 1, p = n - 1
+    
+    while p >= 0 {
+        if (abs(A[i]) > abs(A[j])) == true{
+            results[p] = A[i] * A[i]
+            i += 1
+        } else {
+            results[p] = A[j] * A[j]
+            j -= 1
         }
-        
-        var result: [Int] = [Int]()
-        var i: Int = 0
-        var j: Int = A.count - 1
-        
-        while i != j {
-            if module(A[i]) >= module(A[j]) {
-                result.append(A[i] * A[i])
-                i += 1
-            } else {
-                result.append(A[j] * A[j])
-                j -= 1
-            }
-        }
-        result.append(A[i] * A[i])
-        
-        return result.reversed()
+        p -= 1
     }
     
-    func module(_ number: Int) -> Int {
-        if number < 0 {
-            return -number
-        } else {
-            return number
-        }
+    return results as! [Int]
 }
 }
